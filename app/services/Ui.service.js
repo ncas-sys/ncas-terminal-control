@@ -47,17 +47,8 @@ function UI(events, states, grid, screen, blessed, contrib){
 
 
 UI.prototype.init = function(){
-	UI.titleBox = UI.grid.set(0,0,10,100, UI.blessed.box,
-		{
-			content: '~ nCAS ~',
-			border: {type: "line", fg: "red"},
-			bg: 4,
-			fg: 'white',
-			align: 'center',
-			valign: 'middle'
-		}
-	)
-	UI.menuTable = UI.grid.set(10,0,30,30, UI.blessed.list,
+	/*
+	UI.menuTable = UI.grid.set(0,60,30,40, UI.blessed.list,
 		{
 			keys: true,
 			fg: 'white',
@@ -97,10 +88,10 @@ UI.prototype.init = function(){
 		}
 		UI.menuTable.select(menus[val1])
 	})
-	
+	*/
 
 
-	UI.controllersTable = UI.grid.set(41,0,30,30, UI.contrib.table,
+	UI.controllersTable = UI.grid.set(0,0,35,60, UI.contrib.table,
 		{
 			keys: true,
 			fg: 'white',
@@ -109,10 +100,10 @@ UI.prototype.init = function(){
 			label: 'Connected Controllers',
 			border: {type: "line", fg: "cyan"},
 			columnSpacing: 5,
-			columnWidth: [2, 15, 3, 9, 5]
+			columnWidth: [7, 3, 14, 5]
 		}
 	)
-	UI.nodesTable = UI.grid.set(71,0,30,30, UI.contrib.table,
+	UI.nodesTable = UI.grid.set(35,0,35,60, UI.contrib.table,
 		{
 			keys: true,
 			fg: 'white',
@@ -122,20 +113,19 @@ UI.prototype.init = function(){
 			width: 80,
 			border: {type: "line", fg: "red"},
 			columnSpacing: 5,
-			columnWidth: [2, 15, 15],
+			columnWidth: [17, 15],
 		}
 	)
-
-	UI.log = UI.grid.set(80,31,20,69, UI.contrib.log,
+	
+	UI.log = UI.grid.set(70,0,30,60, UI.contrib.log,
 		{ 
 			fg: "green",
 			selectedFg: "green",
 			label: 'Activity Log'
 		}
 	)
-
-
-	UI.statsStatus = UI.grid.set(10,80,10,10, UI.blessed.box,
+	
+	UI.statsStatus = UI.grid.set(0,60,16,20, UI.blessed.box,
 		{
 			label: 'Connection',
 			bg: '',
@@ -145,16 +135,16 @@ UI.prototype.init = function(){
 		}
 	)
 
-	UI.statsTemp = UI.grid.set(10,90,10,10, UI.blessed.box,
+	UI.statsTemp = UI.grid.set(0,80,16,20, UI.blessed.box,
 		{
-			label: 'Auditorium Temp',
+			label: 'Audit Temp',
 			bg: '',
 			content: '',
 			align: 'center',
 			valign: 'middle'
 		}
 	)
-	UI.statsDomes = UI.grid.set(22,80,10,10, UI.blessed.box,
+	UI.statsDomes = UI.grid.set(16,60,16,20, UI.blessed.box,
 		{
 			label: 'Domes',
 			bg: '',
@@ -163,7 +153,7 @@ UI.prototype.init = function(){
 			valign: 'middle'
 		}
 	)
-	UI.statsSweeps = UI.grid.set(22,90,10,10, UI.blessed.box,
+	UI.statsSweeps = UI.grid.set(16,80,16,20, UI.blessed.box,
 		{
 			label: 'Sweeps',
 			bg: '',
@@ -172,7 +162,7 @@ UI.prototype.init = function(){
 			valign: 'middle'
 		}
 	)
-	UI.statsEmo = UI.grid.set(34,80,10,10, UI.blessed.box,
+	UI.statsEmo = UI.grid.set(32,60,16,20, UI.blessed.box,
 		{
 			label: 'Emo',
 			bg: '',
@@ -181,7 +171,7 @@ UI.prototype.init = function(){
 			valign: 'middle'
 		}
 	)
-	UI.statsHeaters = UI.grid.set(34,90,10,10, UI.blessed.box,
+	UI.statsHeaters = UI.grid.set(32,80,16,20, UI.blessed.box,
 		{
 			label: 'Heaters',
 			bg: '',
@@ -190,7 +180,7 @@ UI.prototype.init = function(){
 			valign: 'middle'
 		}
 	)
-	UI.statsBeams = UI.grid.set(46,80,10,10, UI.blessed.box,
+	UI.statsBeams = UI.grid.set(48,60,16,20, UI.blessed.box,
 		{
 			label: 'Beams',
 			bg: '',
@@ -199,25 +189,7 @@ UI.prototype.init = function(){
 			valign: 'middle'
 		}
 	)
-	UI.statsProjectorPower = UI.grid.set(46,90,10,10, UI.blessed.box,
-		{
-			label: 'Extractors',
-			bg: '',
-			content: '',
-			align: 'center',
-			valign: 'middle'
-		}
-	)
-	UI.statsProjectorShutter = UI.grid.set(58,80,10,10, UI.blessed.box,
-		{
-			label: 'Pro-Shutter',
-			bg: '',
-			content: '',
-			align: 'center',
-			valign: 'middle'
-		}
-	)
-	UI.statsExtractors = UI.grid.set(58,90,10,10, UI.blessed.box,
+	UI.statsProjectorPower = UI.grid.set(48,80,16,20, UI.blessed.box,
 		{
 			label: 'Pro-Power',
 			bg: '',
@@ -226,7 +198,25 @@ UI.prototype.init = function(){
 			valign: 'middle'
 		}
 	)
-	UI.statsLighting = UI.grid.set(70,80,10,10, UI.blessed.box,
+	UI.statsProjectorShutter = UI.grid.set(64,60,16,20, UI.blessed.box,
+		{
+			label: 'Pro-Shutter',
+			bg: '',
+			content: '',
+			align: 'center',
+			valign: 'middle'
+		}
+	)
+	UI.statsExtractors = UI.grid.set(64,80,16,20, UI.blessed.box,
+		{
+			label: 'Extractors',
+			bg: '',
+			content: '',
+			align: 'center',
+			valign: 'middle'
+		}
+	)
+	UI.statsLighting = UI.grid.set(80,60,16,20, UI.blessed.box,
 		{
 			label: 'Lighting',
 			bg: '',
@@ -235,7 +225,7 @@ UI.prototype.init = function(){
 			valign: 'middle'
 		}
 	)
-	UI.statsDoing = UI.grid.set(70,90,10,10, UI.blessed.box,
+	UI.statsDoing = UI.grid.set(80,80,16,20, UI.blessed.box,
 		{
 			content: 'all done',
 			align: 'center',
@@ -275,7 +265,6 @@ updateConnectionsLists = function(){
 	var nodes = [];
 	for (var key in connections) {
 		var obj = []
-		obj.push(key)
 		obj.push(connections[key].name)
 		if(connections[key].type=='controller'){
 			obj.push(connections[key].locale[0].toUpperCase())
@@ -290,11 +279,11 @@ updateConnectionsLists = function(){
 		}
 	}
 	UI.controllersTable.setData({
-		headers: ['ID', 'Name', 'Locale', 'IP', 'Auth'],
+		headers: ['Name', 'Locale', 'IP', 'Auth'],
 		data:controllers
 	})
 	UI.nodesTable.setData({
-		headers: ['ID', 'Name', 'IP'],
+		headers: ['Name', 'IP'],
 		data:nodes
 	})
 	UI.screen.render()
@@ -333,7 +322,7 @@ updateStates = function(obj){
 		}else if(value=='Off' || value=='off' || value==0){
 			color=1
 		}else{
-			color=3
+			color=4
 		}
 		if(statBox!=null && color!=null){
 			statBox.style.bg = color;

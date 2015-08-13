@@ -49,7 +49,7 @@ readyToConnect = function(){
 	})
 	Comms.socket.on('UpdateState', function(obj){
 		Comms.states.updateState(obj);
-		var log = 'State for ' + obj.state + ' was updated to ' + obj.value;
+		var log = 'State for ' + obj.node + ' was updated to ' + obj.value;
 		Comms.events.emit('addLog', log)
 	})
 }

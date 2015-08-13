@@ -14,14 +14,13 @@ function States(events){
 		extractors: null,
 		lightingScene: null
 	}
-
 }
 States.prototype.resetConnections = function(){
 	States.connections = {}
 }
 
 States.prototype.updateState = function(obj){
-	States.states[obj.state] = obj.value;
+	States.states[obj.node] = obj.value;
 	States.events.emit('refreshStates')
 }
 
