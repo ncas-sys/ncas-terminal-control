@@ -87,7 +87,7 @@ UI.prototype.init = function(){
 		{
 			label: 'Connection',
 			bg: '',
-			content: '',
+			content: "",
 			align: 'center',
 			valign: 'middle'
 		}
@@ -97,7 +97,7 @@ UI.prototype.init = function(){
 		{
 			label: 'Emo',
 			bg: '',
-			content: '',
+			content: "",
 			align: 'center',
 			valign: 'middle'
 		}
@@ -107,7 +107,7 @@ UI.prototype.init = function(){
 		{
 			label: 'Domes',
 			bg: '',
-			content: '',
+			content: "",
 			align: 'center',
 			valign: 'middle'
 		}
@@ -116,7 +116,7 @@ UI.prototype.init = function(){
 		{
 			label: 'Sweeps',
 			bg: '',
-			content: '',
+			content: "",
 			align: 'center',
 			valign: 'middle'
 		}
@@ -125,7 +125,7 @@ UI.prototype.init = function(){
 		{
 			label: 'Heaters',
 			bg: '',
-			content: '',
+			content: "",
 			align: 'center',
 			valign: 'middle'
 		}
@@ -134,7 +134,7 @@ UI.prototype.init = function(){
 		{
 			label: 'Beams',
 			bg: '',
-			content: '',
+			content: "",
 			align: 'center',
 			valign: 'middle'
 		}
@@ -143,7 +143,7 @@ UI.prototype.init = function(){
 		{
 			label: 'Extractors',
 			bg: '',
-			content: '',
+			content: "",
 			align: 'center',
 			valign: 'middle'
 		}
@@ -152,7 +152,7 @@ UI.prototype.init = function(){
 		{
 			label: 'Lighting',
 			bg: '',
-			content: '',
+			content: "",
 			align: 'center',
 			valign: 'middle'
 		}
@@ -261,7 +261,12 @@ updateStates = function(obj){
 			}
 			if(statBox!=null && value!=null){
 			//	console.log(value);
-			//	statBox.content = value;
+				if(value==0){
+					value = 'Off';
+				}else if(value==1){
+					value = 'On';
+				}
+				statBox.content = String(value);
 			}
 		}
 	}
