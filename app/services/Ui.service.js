@@ -47,56 +47,14 @@ function UI(events, states, grid, screen, blessed, contrib){
 
 
 UI.prototype.init = function(){
-	/*
-	UI.menuTable = UI.grid.set(0,60,30,40, UI.blessed.list,
-		{
-			keys: true,
-			fg: 'white',
-			style: {
-				selected: {
-					fg: 1
-				}
-			},
-			interactive: true,
-			label: 'Main Menu',
-			border: {type: "line", fg: "cyan"},
-			items:UI.mainMenuItems
-		}
-	)
-
-	UI.menuTable.key('enter', function(val1, val2, val3){
-		MainMenuItemSelect(UI.menuTable.selected);
-	})
-	UI.menuTable.key(['1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g'], function(val1, val2, val3){
-		var menus = {
-			'1': 0,
-			'2': 1,
-			'3': 2,
-			'4': 3,
-			'5': 4,
-			'6': 5,
-			'7': 6,
-			'8': 7,
-			'9': 8,
-			'a': 9,
-			'b': 10,
-			'c': 11,
-			'd': 12,
-			'e': 13,
-			'f': 14,
-			'8': 15,
-		}
-		UI.menuTable.select(menus[val1])
-	})
-	*/
-
+	
 
 	UI.controllersTable = UI.grid.set(0,0,35,60, UI.contrib.table,
 		{
 			keys: true,
 			fg: 'white',
 			selectedFg: 'white',
-			interactive: true,
+			interactive: false,
 			label: 'Connected Controllers',
 			border: {type: "line", fg: "cyan"},
 			columnSpacing: 5,
@@ -125,7 +83,7 @@ UI.prototype.init = function(){
 		}
 	)
 	
-	UI.statsStatus = UI.grid.set(0,60,16,20, UI.blessed.box,
+	UI.statsStatus = UI.grid.set(0,60,25,20, UI.blessed.box,
 		{
 			label: 'Connection',
 			bg: '',
@@ -135,34 +93,7 @@ UI.prototype.init = function(){
 		}
 	)
 
-	UI.statsTemp = UI.grid.set(0,80,16,20, UI.blessed.box,
-		{
-			label: 'Audit Temp',
-			bg: '',
-			content: '',
-			align: 'center',
-			valign: 'middle'
-		}
-	)
-	UI.statsDomes = UI.grid.set(16,60,16,20, UI.blessed.box,
-		{
-			label: 'Domes',
-			bg: '',
-			content: '',
-			align: 'center',
-			valign: 'middle'
-		}
-	)
-	UI.statsSweeps = UI.grid.set(16,80,16,20, UI.blessed.box,
-		{
-			label: 'Sweeps',
-			bg: '',
-			content: '',
-			align: 'center',
-			valign: 'middle'
-		}
-	)
-	UI.statsEmo = UI.grid.set(32,60,16,20, UI.blessed.box,
+	UI.statsEmo = UI.grid.set(0,80,25,20, UI.blessed.box,
 		{
 			label: 'Emo',
 			bg: '',
@@ -171,7 +102,26 @@ UI.prototype.init = function(){
 			valign: 'middle'
 		}
 	)
-	UI.statsHeaters = UI.grid.set(32,80,16,20, UI.blessed.box,
+	
+	UI.statsDomes = UI.grid.set(25,60,25,20, UI.blessed.box,
+		{
+			label: 'Domes',
+			bg: '',
+			content: '',
+			align: 'center',
+			valign: 'middle'
+		}
+	)
+	UI.statsSweeps = UI.grid.set(25,80,25,20, UI.blessed.box,
+		{
+			label: 'Sweeps',
+			bg: '',
+			content: '',
+			align: 'center',
+			valign: 'middle'
+		}
+	)
+	UI.statsHeaters = UI.grid.set(50,80,25,20, UI.blessed.box,
 		{
 			label: 'Heaters',
 			bg: '',
@@ -180,7 +130,7 @@ UI.prototype.init = function(){
 			valign: 'middle'
 		}
 	)
-	UI.statsBeams = UI.grid.set(48,60,16,20, UI.blessed.box,
+	UI.statsBeams = UI.grid.set(50,60,25,20, UI.blessed.box,
 		{
 			label: 'Beams',
 			bg: '',
@@ -189,25 +139,7 @@ UI.prototype.init = function(){
 			valign: 'middle'
 		}
 	)
-	UI.statsProjectorPower = UI.grid.set(48,80,16,20, UI.blessed.box,
-		{
-			label: 'Pro-Power',
-			bg: '',
-			content: '',
-			align: 'center',
-			valign: 'middle'
-		}
-	)
-	UI.statsProjectorShutter = UI.grid.set(64,60,16,20, UI.blessed.box,
-		{
-			label: 'Pro-Shutter',
-			bg: '',
-			content: '',
-			align: 'center',
-			valign: 'middle'
-		}
-	)
-	UI.statsExtractors = UI.grid.set(64,80,16,20, UI.blessed.box,
+	UI.statsExtractors = UI.grid.set(75,80,25,20, UI.blessed.box,
 		{
 			label: 'Extractors',
 			bg: '',
@@ -216,18 +148,11 @@ UI.prototype.init = function(){
 			valign: 'middle'
 		}
 	)
-	UI.statsLighting = UI.grid.set(80,60,16,20, UI.blessed.box,
+	UI.statsLighting = UI.grid.set(75,60,25,20, UI.blessed.box,
 		{
 			label: 'Lighting',
 			bg: '',
 			content: '',
-			align: 'center',
-			valign: 'middle'
-		}
-	)
-	UI.statsDoing = UI.grid.set(80,80,16,20, UI.blessed.box,
-		{
-			content: 'all done',
 			align: 'center',
 			valign: 'middle'
 		}
@@ -239,17 +164,7 @@ UI.prototype.init = function(){
 	UI.screen.key(['escape', 'q', 'C-c'], function(ch, key) {
 		return process.exit(0);
 	});
-	UI.screen.key(['m'], function(ch, key) {
-		UI.menuTable.focus()
-	});
-
-	UI.screen.key(['c'], function(ch, key) {
-		UI.controllersTable.focus()
-	});
-
-	UI.screen.key(['n'], function(ch, key) {
-		UI.nodesTable.focus()
-	});
+	
 }
 
 
@@ -264,18 +179,20 @@ updateConnectionsLists = function(){
 	var controllers = [];
 	var nodes = [];
 	for (var key in connections) {
-		var obj = []
-		obj.push(connections[key].name)
-		if(connections[key].type=='controller'){
-			obj.push(connections[key].locale[0].toUpperCase())
-			obj.push(connections[key].ip)
-			obj.push(connections[key].auth)
-			controllers.push(obj)
-		}else{
-			if(connections[key].ip){
+		if(connections[key]!=null){
+			var obj = []
+			obj.push(connections[key].name)
+			if(connections[key].type=='controller'){
+				obj.push(connections[key].locale[0].toUpperCase())
 				obj.push(connections[key].ip)
+				obj.push(connections[key].auth)
+				controllers.push(obj)
+			}else{
+				if(connections[key].ip){
+					obj.push(connections[key].ip)
+				}
+				nodes.push(obj)
 			}
-			nodes.push(obj)
 		}
 	}
 	UI.controllersTable.setData({
@@ -317,66 +234,39 @@ updateStates = function(obj){
 		}else if(key=='lightingScene'){
 			statBox = UI.statsLighting
 		}
-		if(value=='On' || value=='on' || value==1){
-			color=2
-		}else if(value=='Off' || value=='off' || value==0){
-			color=1
+		if(key=='connection'){
+			//custom options for connection
+			if(value=='connected'){
+				color=2
+			}else if(value=='offline'){
+				color=1
+			}else if(value=='detached'){
+				color=8
+			}
+			if(value!=null){
+				var text = value.toString()
+				statBox.content = value;
+				statBox.style.bg = color;
+			}
 		}else{
-			color=4
-		}
-		if(statBox!=null && color!=null){
-			statBox.style.bg = color;
-		}
-		if(statBox!=null && value!=null){
-		//	console.log(value);
-		//	statBox.content = value;
+			if(value=='On' || value=='on' || value==1){
+				color=2
+			}else if(value=='Off' || value=='off' || value==0){
+				color=1
+			}else{
+				color=4
+			}
+			if(statBox!=null && color!=null){
+				statBox.style.bg = color;
+			}
+			if(statBox!=null && value!=null){
+			//	console.log(value);
+			//	statBox.content = value;
+			}
 		}
 	}
 	UI.screen.render();
 }
-
-
-MainMenuItemSelect = function(item){
-	if(UI.centerPosition!=null){
-		UI.centerPosition.destroy();
-	}
-	if(UI.typePosition!=null){
-		UI.typePosition.destroy();
-	}
-	switch(item) {
-		case 0:
-			//authorise
-			CenterUI.authorise()
-			break;
-		default:
-			//nothing to do
-	}
-}
-
-var CenterUI = {
-	authorise: function(){
-		UI.typePosition = UI.grid.set(10,30,6,50, UI.blessed.textbox,
-			{
-				label: 'Authorise Session',
-				censor: true,
-				secret: false,
-				inputOnFocus: true,
-			}
-		)
-		UI.typePosition.key('enter', function(){
-			var val = _.clone(UI.typePosition.value);
-			UI.events.emit('authAttempt', val)
-			UI.typePosition.destroy();
-			UI.typePosition = null;
-			UI.statsDoing.content = 'authing...'
-			UI.screen.render();
-		})
-		UI.typePosition.focus();
-		UI.screen.render();
-	}
-
-}
-
 
 
 

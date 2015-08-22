@@ -4,34 +4,37 @@ function Comms(socket, events, states){
 	Comms.states = states
 	Comms.states.resetConnections();
 	readyToConnect();
-
-	events.on('authAttempt', function(val){
-		socket.emit('AuthAttempt', val)
-	})
-
 }
 
 readyToConnect = function(){
 	Comms.socket.on('connect', function(){
-		var stateObj = {
-			state: 'connection',
-			value: 'Read Only'
-		}
-		Comms.states.updateState(stateObj)
-		
-		Comms.states.resetConnections();
+		Comms.states.updateState({
+			node: 'connection',
+			value: 'detached'
+		});
 		var obj = {
+			request: 'register',
 			name: 'Terminal Controller',
 			type: 'controller',
 			locale: 'internal'
 		}
-		Comms.socket.emit('Register', obj)
-		
-	});
-	Comms.socket.on('Welcome', function(obj){
 		Comms.states.resetConnections();
-		Comms.socket.emit('GiveMeEverything')
+		Comms.socket.emit('Register', obj);
+	});
+
+
+
+	Comms.socket.on('WelcomeController', function(id){
+		Comms.states.updateState({
+			node: 'connection',
+			value: 'connected'
+		});
+		Comms.socket.emit('ToMaster', {
+			event: 'GiveMeEverything'
+		})
 	})
+
+
 	Comms.socket.on('NewConnection', function(obj){
 		Comms.states.addConnection(obj);
 		var log = '';
@@ -51,6 +54,29 @@ readyToConnect = function(){
 		Comms.states.updateState(obj);
 		var log = 'State for ' + obj.node + ' was updated to ' + obj.value;
 		Comms.events.emit('addLog', log)
+	})
+
+
+
+	Comms.socket.on('disconnect', function(){
+		//loose all data please
+		Comms.states.resetConnections();
+		Comms.states.wipeStates()
+		Comms.states.updateState({
+			node: 'connection',
+			value: 'offline'
+		});
+	})
+
+	//this will only come from the external server if this is an external connection
+	Comms.socket.on('MasterConnectionLost', function(){
+		//loose all data please
+		Comms.states.resetConnections();
+		Comms.states.wipeStates()
+		Comms.states.updateState({
+			node: 'connection',
+			value: 'detached'
+		});
 	})
 }
 
